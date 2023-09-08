@@ -1,0 +1,41 @@
+name: Deploy API to Heroku
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'api/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    # Installation des dépendances
+    - name: Install dependencies
+      run: pip install -r api/requirements.txt
+
+    # Exécution des tests sur api.py
+    - name: Run tests on api.py
+      run: pytest api/api.py
+
+    # Connexion à Heroku
+    - name: Login to Heroku
+      run: heroku login -i <<< "${{ secrets.HEROKU_API_TOKEN }}"
+
+    # Ajout du dépôt Heroku en tant que remote
+    - name: Add Heroku remote
+      run: git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/api2.git
+
+    # Pousser le dossier API vers Heroku
+    - name: Push API folder to Heroku
+      run: git subtree push --prefix api heroku main
