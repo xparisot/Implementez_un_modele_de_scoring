@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Approval Prediction</title>
+</head>
+<body>
+    <h1>Loan Approval Prediction</h1>
+    <form method="post">
+        <!-- Update the input names and options based on your feature names and choices -->
+        <label for="NAME_CONTRACT_TYPE">Contract Type:</label>
+        <input type="checkbox" name="NAME_CONTRACT_TYPE_Cash loans" value="1">Cash loans
+        <input type="checkbox" name="NAME_CONTRACT_TYPE_Revolving loans" value="1">Revolving loans
+        <br>
+
+        <label for="CODE_GENDER">Gender:</label>
+        <input type="radio" name="CODE_GENDER_F" value="1">Female
+        <input type="radio" name="CODE_GENDER_M" value="1">Male
+        <br>
+
+        <label for="AMT_CREDIT">Credit Amount:</label>
+        <input type="number" name="AMT_CREDIT" step="any" value="0">
+        <br>
+
+        <!-- Add more input fields for other features as needed -->
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if decision %}
+    <h2>Loan Approval Result:</h2>
+    <p>Decision: {{ decision }}</p>
+    <p>Probability: {{ probability }}%</p>
+
+    <h2>Feature Values:</h2>
+    <table border="1">
+        <tr>
+            {% for col in feature_values.columns %}
+            <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for col in feature_values.columns %}
+            <td>{{ feature_values.iloc[0][col] }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <h2>Feature Importance:</h2>
+    {% if feature_importance %}
+    {{ feature_importance | safe }}
+    {% else %}
+    <p>Feature importance data not available.</p>
+    {% endif %}
+
+    <h2>SHAP Force Plot:</h2>
+    {% if plot_html %}
+    {{ plot_html | safe }}
+    {% else %}
+    <p>SHAP plot not available.</p>
+    {% endif %}
+
+    {% endif %}
+</body>
+</html>
