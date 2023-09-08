@@ -24,8 +24,14 @@ jobs:
     - name: Install dependencies
       run: pip install -r api/requirements.txt
 
-    # Exécution des tests sur api.py
+    # Vérifier si api.py a été modifié
+    - name: Check if api.py was modified
+      id: checkfile
+      run: echo "::set-output name=api_modified::$(git diff --name-only HEAD~ HEAD | grep 'api/api.py')"
+
+    # Exécution des tests sur api.py uniquement si api.py a été modifié
     - name: Run tests on api.py
+      if: steps.checkfile.outputs.api_modified == 'api/api.py'
       run: pytest api/api.py
 
     # Connexion à Heroku
