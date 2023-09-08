@@ -4,7 +4,7 @@ import joblib
 from lime.lime_tabular import LimeTabularExplainer
 import os
 
-# Chargement Flask
+# Chargement Flaskapp
 app = Flask(__name__)
 # Charger le modèle et les données
 df_wk_path = 'df_wk.csv'
