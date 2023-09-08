@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/516647172970722327/5c76bfa763194307b4a58cac2a8cf095/artifacts
+end_time: 1692180873844
+entry_point_name: ''
+experiment_id: '516647172970722327'
+lifecycle_stage: active
+run_id: 5c76bfa763194307b4a58cac2a8cf095
+run_name: zealous-kit-158
+run_uuid: 5c76bfa763194307b4a58cac2a8cf095
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1692180431664
+status: 3
+tags: []
+user_id: name

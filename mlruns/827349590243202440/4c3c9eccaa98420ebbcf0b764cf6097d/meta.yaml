@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/827349590243202440/4c3c9eccaa98420ebbcf0b764cf6097d/artifacts
+end_time: 1694166619498
+entry_point_name: ''
+experiment_id: '827349590243202440'
+lifecycle_stage: active
+run_id: 4c3c9eccaa98420ebbcf0b764cf6097d
+run_name: LGBM_with_Custom_Score
+run_uuid: 4c3c9eccaa98420ebbcf0b764cf6097d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1694166617706
+status: 3
+tags: []
+user_id: name

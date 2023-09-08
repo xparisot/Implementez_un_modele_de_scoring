@@ -1,0 +1,13 @@
+aliases: []
+creation_timestamp: 1694157737318
+current_stage: None
+description: ''
+last_updated_timestamp: 1694157737318
+name: best_rfc_model
+run_id: a1084fc0e708408589f377b7341d899c
+run_link: ''
+source: mlflow-artifacts:/516647172970722327/a1084fc0e708408589f377b7341d899c/artifacts/model
+status: READY
+status_message: null
+user_id: null
+version: 4

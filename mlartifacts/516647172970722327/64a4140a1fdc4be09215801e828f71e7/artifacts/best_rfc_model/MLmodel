@@ -1,0 +1,14 @@
+artifact_path: best_rfc_model
+flavors:
+  python_function:
+    cloudpickle_version: 2.2.1
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.10.12
+mlflow_version: 2.5.0
+model_uuid: 68db2f57d810481f9cff2e362e4fb5b0
+run_id: 64a4140a1fdc4be09215801e828f71e7
+utc_time_created: '2023-08-16 09:23:52.087214'

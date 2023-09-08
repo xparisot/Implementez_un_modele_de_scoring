@@ -1,0 +1,14 @@
+artifact_path: best_xgb_model
+flavors:
+  python_function:
+    cloudpickle_version: 2.2.1
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.10.12
+mlflow_version: 2.5.0
+model_uuid: e6e247a3132046b782b0af3d25d5b83e
+run_id: d9b9e6956de44a31a8f9440451577a14
+utc_time_created: '2023-08-16 11:06:23.071322'

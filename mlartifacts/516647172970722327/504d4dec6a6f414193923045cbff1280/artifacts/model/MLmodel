@@ -1,0 +1,18 @@
+artifact_path: model
+flavors:
+  python_function:
+    artifacts:
+      pipeline:
+        path: artifacts/feature_importance_xgbclassifier.txt
+        uri: feature_importance_xgbclassifier.txt
+    cloudpickle_version: 2.2.1
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.10.12
+mlflow_version: 2.5.0
+model_uuid: 75e4ef43a76948aebea552e9906fc28d
+run_id: 504d4dec6a6f414193923045cbff1280
+utc_time_created: '2023-08-16 11:57:53.864732'

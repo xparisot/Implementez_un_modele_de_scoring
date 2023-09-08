@@ -1,0 +1,18 @@
+artifact_path: model
+flavors:
+  python_function:
+    artifacts:
+      pipeline:
+        path: artifacts/feature_importance_linearsvc.txt
+        uri: feature_importance_linearsvc.txt
+    cloudpickle_version: 2.2.1
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.10.12
+mlflow_version: 2.5.0
+model_uuid: 585284b904904ba183ebca6fbae31c2d
+run_id: 2206555b2023450ab03b7d673d0a2161
+utc_time_created: '2023-08-16 11:46:59.602319'

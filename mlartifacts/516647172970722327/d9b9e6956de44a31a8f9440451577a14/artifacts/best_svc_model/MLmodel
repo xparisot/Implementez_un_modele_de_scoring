@@ -1,0 +1,14 @@
+artifact_path: best_svc_model
+flavors:
+  python_function:
+    cloudpickle_version: 2.2.1
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.10.12
+mlflow_version: 2.5.0
+model_uuid: 1aed4816e2d346f19462ceeae639067b
+run_id: d9b9e6956de44a31a8f9440451577a14
+utc_time_created: '2023-08-16 11:06:20.357484'
