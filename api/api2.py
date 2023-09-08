@@ -23,7 +23,6 @@ columns_for_prediction = ['Nombre_d_enfants', 'Montant_annuite', 'AGE',
    'Marie', 'Habite_en_appartement', 'Pas_de_credit_en_cours',
    'Scoring_externe_1', 'Scoring_externe_2', 'Scoring_externe_3']
 
-# Définition des routes
 @app.route('/', methods=['GET'])
 def home():
     return jsonify({"message": "Bienvenue sur l'API de prédiction!"})
