@@ -4,11 +4,10 @@ import joblib
 from lime.lime_tabular import LimeTabularExplainer
 import os
 
-# Ligne modification test yaml V_2
-
-# Chargement Flaskapp
+# Initialize Flask app
 app = Flask(__name__)
-# Charger le modèle et les données
+
+# Load the model and data
 df_wk_path = 'df_wk.csv'
 model_pipeline_path = 'model_pipeline_with_params.joblib'
 df_wk = pd.read_csv(df_wk_path)
@@ -23,61 +22,61 @@ columns_for_prediction = ['Nombre_d_enfants', 'Montant_annuite', 'AGE',
    'Type_de_contrat_Pret_d_especes', 'Femme', 'Homme',
    'Ne_possede_pas_de_vehicule', 'Possede_un_vehicule',
    'Possede_son_logement', 'Revenu_Non_salarie', 'Etudes_Superieures',
-   'Marie', 'Habite_en_appartement', 'Pas_de_credit_en_cours',
-   'Scoring_externe_1', 'Scoring_externe_2', 'Scoring_externe_3']
+   'Marie', 'Habite_en_appartement', 'Scoring_externe_1', 'Scoring_externe_2', 'Scoring_externe_3']
 
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({"message": "Bienvenue sur l'API de prédiction!"})
-
-@app.route('/full_client_data', methods=['GET'])
-def get_full_client_data():
-    client_id = request.args.get('client_id')
-    
+# Function to fetch client data
+def fetch_client_data(client_id):
     try:
         client_id_int = int(client_id)
     except ValueError:
-        return jsonify({"error": "Invalid Client ID"}), 400
+        return None, {"error": "Invalid Client ID"}, 400
 
     client_data = df_wk[df_wk['SK_ID_CURR'] == client_id_int]
     
     if client_data.empty:
-        return jsonify({"error": "Client ID not found"}), 404
+        return None, {"error": "Client ID not found"}, 404
     
-    # Convertir le DataFrame en dictionnaire
-    client_data_dict = client_data.iloc[0].to_dict()
+    return client_data.iloc[0], None, None
+
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "Bienvenue sur l'api de prediction"})
+
+@app.route('/full_client_data', methods=['GET'])
+def get_full_client_data():
+    client_id = request.args.get('client_id')
+    client_data, error, status = fetch_client_data(client_id)
+    if error:
+        return jsonify(error), status
     
-    return jsonify(client_data_dict)
+    return jsonify(client_data.to_dict())
+
+@app.route('/prediction', methods=['GET'])
+def get_prediction():
+    client_id = request.args.get('client_id')
+    input_data, error, status = fetch_client_data(client_id)
+    if error:
+        return jsonify(error), status
+    
+    # Drop unnecessary columns
+    input_data = input_data[columns_for_prediction]
+    
+    # Perform prediction
+    prediction = loaded_model_pipeline.predict(input_data.values.reshape(1, -1))
+    prediction_proba = loaded_model_pipeline.predict_proba(input_data.values.reshape(1, -1))
+    
+    # Decision and rounded probability
+    decision = "accorde" if prediction[0] == 0 else "refuse"
+    probability = round(prediction_proba[0][0] * 100, 2)
+    
+    return jsonify({"client_id": client_id, "decision": decision, "probability": probability})
+
 
 @app.route('/average_values_all', methods=['GET'])
 def get_average_values_all():
     # Calculer la moyenne pour chaque colonne
     average_values = df_wk.mean().to_dict()
     return jsonify(average_values)
-
-@app.route('/prediction', methods=['GET'])
-def get_prediction():
-    client_id = request.args.get('client_id')
-    client_data = df_wk[df_wk['SK_ID_CURR'] == int(client_id)]
-    if client_data.empty:
-        return jsonify({"error": "Client ID not found"}), 404
-    
-    # Transformez les données en un format que le modèle peut accepter
-    input_data = client_data[columns_for_prediction]
-    
-    # Supprimer la colonne SK_ID_CURR 
-    if 'SK_ID_CURR' in input_data.columns:
-        input_data = input_data.drop(['SK_ID_CURR'], axis=1)
-    
-    # Faites la prédiction
-    prediction = loaded_model_pipeline.predict(input_data)
-    prediction_proba = loaded_model_pipeline.predict_proba(input_data)
-    
-    # Décision et probabilité arrondie
-    decision = "accorde" if prediction[0] == 0 else "refuse"
-    probability = round(prediction_proba[0][0] * 100, 2)
-    
-    return jsonify({"client_id": client_id, "decision": decision, "probability": probability})
 
 @app.route('/info_client', methods=['GET'])
 def get_info_client():
