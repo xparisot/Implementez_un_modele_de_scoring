@@ -20,34 +20,26 @@ jobs:
       with:
         python-version: '3.x'
 
-    # Installation des dépendances
+    # Install dependencies
     - name: Install dependencies
       run: pip install -r api/requirements.txt
 
-    # Vérifier si api2.py a été modifié
+    # Check if api2.py was modified
     - name: Check if api2.py was modified
       id: checkfile
       run: echo "::set-output name=api2_modified::$(git diff --name-only HEAD~ HEAD | grep 'api/api2.py')"
 
-    # Exécution des tests sur api2.py uniquement si api2.py a été modifié
+    # Run tests on api2.py only if api2.py was modified
     - name: Run tests on api2.py
       if: steps.checkfile.outputs.api2_modified == 'api/api2.py'
       run: pytest api/api2.py
 
-    # Connexion à Heroku
-    - name: Déploiement sur Heroku
-      uses: akhileshns/heroku-deploy@v3.12.14
-      with:
-        heroku_api_key: ${{ secrets.HEROKU_API_TOKEN }}
-        heroku_app_name: "api2"
-        heroku_email: "xavier.parisot@gmail.com"
-
-    # Ajout du dépôt Heroku en tant que remote
+    # Add Heroku remote
     - name: Add Heroku remote
       env:
         HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
       run: git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/api2.git
 
-    # Pousser le dossier API vers Heroku
+    # Deploy to Heroku
     - name: Push API folder to Heroku
       run: git subtree push --prefix api heroku main
