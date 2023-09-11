@@ -36,7 +36,7 @@ jobs:
 
     # Connexion à Heroku
     - name: Connexion à Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12 
+      uses: akhileshns/heroku-deploy@v3.12.14 
       with:
         api_key: ${{ secrets.HEROKU_API_TOKEN }}
         app_name: "api2" 
