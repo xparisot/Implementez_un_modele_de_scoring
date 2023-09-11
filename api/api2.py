@@ -4,6 +4,8 @@ import joblib
 from lime.lime_tabular import LimeTabularExplainer
 import os
 
+# Ligne modification test yaml
+
 # Chargement Flaskapp
 app = Flask(__name__)
 # Charger le modèle et les données
