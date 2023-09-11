@@ -36,7 +36,7 @@ jobs:
 
     # Connexion à Heroku
     - name: Login to Heroku
-      uses: actions/heroku@v1.0.0
+      uses: actions/heroku
       with:
         api_key: ${{ secrets.HEROKU_API_TOKEN }}
 
