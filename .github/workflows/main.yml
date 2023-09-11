@@ -34,10 +34,13 @@ jobs:
       if: steps.checkfile.outputs.api_modified == 'api/api.py'
       run: pytest api/api.py
 
+    - name: Set environment variable for Heroku API token
+      run: echo "HEROKU_API_TOKEN=${{ secrets.HEROKU_API_TOKEN }}" >> $GITHUB_ENV
+
     - name: Login to Heroku
       uses: actions/heroku@v1.0.0
       with:
-      api_key: ${{ secrets.HEROKU_API_TOKEN }}
+        api_key: ${{ secrets.HEROKU_API_TOKEN }}
 
     # Ajout du dépôt Heroku en tant que remote
     - name: Add Heroku remote
