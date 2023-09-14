@@ -198,8 +198,7 @@ def update_client_info_details(n_submit, n_clicks, client_id):
         html.Div(f"Marié: {'Oui' if data['Marie'] == 1 else 'Non'}"),
         html.Div(f"Possède une voiture: {'Oui' if data['Possede_un_vehicule'] == 1 else 'Non'}"),
         html.Div(f"Possède un logement: {'Oui' if data['Possede_son_logement'] == 1 else 'Non'}"),
-        html.Div(f"Etudes supérieures: {'Oui' if data['Etudes_Superieures'] == 1 else 'Non'}"),
-        html.Div(f"Crédit en cours: {'Oui' if data['Pas_de_credit_en_cours'] == 1 else 'Non'}")
+        html.Div(f"Etudes supérieures: {'Oui' if data['Etudes_Superieures'] == 1 else 'Non'}")
     ]
 
 @app.callback(
