@@ -16,22 +16,31 @@ Le tableau HTML d’analyse de data drift réalisé à partir d’evidently est 
 
 Architecture du repository et contenu des dossiers
 
-.github/workflows : ce dossier est composé du fichier .yml perme3ant le déploiement et le test en
-con6nu de l’api.
-api : con6ent les dossiers __pycache__ , sta:c qui con6ent les fichiers images du dashboard, templates avec le fichier index.html, structure html de l’api et enfin le dossier test : fichiers de test du projet
+.github/workflows : ce dossier est composé du fichier .yml permettant le déploiement et le test en continu de l’api.
+api : contient les dossiers __pycache__ , static qui contient les fichiers images du dashboard, templates avec le fichier index.html, structure html de l’api et enfin le dossier test : fichiers de test du projet
+
 Les fichiers de codes pour l’api sont :
 api2.py : code de l’api
 /test/test_api.py : fichiers de test pytest
-appli : con6ent les dossiers sta:c qui con6ent les fichiers images du dashboard, templates avec le fichier index.html, structure html de l’api
+
+appli : contient les dossiers static qui contient les fichiers images du dashboard, templates avec le fichier index.html, structure html de l’api
+
 Les fichiers de codes pour l’api sont :
+
 dash_api.py : code du dashboard
 /test/test_app.py
-data_dri@ : con6ent les fichier code et html pour le datadriC
-mlar:fact : ce dossier con6ent les artefacts des modèles enregistrés sur MLFLOW mlruns : ce dossier est con6ent les runs MLFLOW
+
+
+data_drift : contient les fichier code et html pour le datadrift
+
+mlartifact : ce dossier con6ent les artefacts des modèles enregistrés sur MLFLOW mlruns : ce dossier est con6ent les runs MLFLOW
+
 models : Les modèles sont dans ce dossier. Ils sont enregistrés en version « normale », sans hyperparamètres, et en version pré entrainée, avec les hyperparamètres accessibles. Il y a la version finale du modèle LightGbm
+
 notebooks : les notebooks sont les suivants :
 EDA.ipynb : Notebook de l’analyse de donnée
-feature_engineering : Notebook de crea6on du dataframe et feature engineering Modelisa6on_MLFLOW : Notebook de modélisa6on et de créa6on du modèle Pipeline : Notebook de test du pipeline
-Les fichiers .py sont les fichiers de fonc6ons personnalisées
+feature_engineering : Notebook de creation du dataframe et feature engineering Modelisation_MLFLOW : Notebook de modélisation et de création du modèle Pipeline : Notebook de test du pipeline
+
+Les fichiers .py sont les fichiers de fonctions personnalisées
 
 
